@@ -1,0 +1,7 @@
+secret.py
+*.sqlite3
+db.*
+
+enc/
+
+server/server/__pycache__/
