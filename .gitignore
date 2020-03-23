@@ -5,3 +5,6 @@ db.*
 enc/
 
 server/server/__pycache__/
+
+server/media/
+server/static/
