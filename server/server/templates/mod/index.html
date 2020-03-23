@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="header">
+    <h1>Classes Moderated by {{ user }}</h1>
+</div>
+<div class="main">
+
+    {% for class in classes %}
+        <div>
+            <a href="{% url 'courses:show' class.url %}">{{class.name}}</a>
+            <p>{{ class.files.all|length }} Document</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

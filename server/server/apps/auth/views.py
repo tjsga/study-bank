@@ -26,3 +26,10 @@ def login(request):
         return redirect(reverse("index"))
     except InvalidGrantError:
         return redirect(reverse("login"))
+        
+def logout(request):
+    if 'user' in request.session.keys():
+        del request.session["user"]
+    if 'type' in request.session.keys():
+        del request.session["type"]
+    return redirect(reverse("index"))

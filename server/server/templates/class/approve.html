@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block body %}
+    Success. You have Approved {{ doc.name }} by {{ doc.uploader }} <a href="{{ doc.payload.url }}">Download</a> for the Course <a href="{% url 'courses:show' course.url %}">{{ course.name }}</a>.
+{% endblock %}

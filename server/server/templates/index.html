@@ -2,4 +2,9 @@
 {% block body %}
     <h1 class="text-4xl font-bold">Study Bank</h1>
     <h3> Welcome, {{ user }}</h3>
+    {% if is_mod %}
+        <a href='{% url 'mod:dash' %}'>Moderator Dashboard</a>
+    {% endif %}
+    
+        <a href='{% url 'course:index' %}'>View Courses</a>
 {% endblock %}

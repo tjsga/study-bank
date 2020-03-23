@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block head %}
+<style>
+    .unapproved {
+        border: 5px;
+        border-color: blue;
+        border-style: solid;
+    }
+    .removed {
+        border: 5px;
+        border-color: red;
+        border-style: solid;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+<div class="header">
+	<h1>{{ course.name }}</h1>
+</div>
+<div class="main">
+    {% if is_mod %}
+        <h3>You have moderator permissions on this course, which means you can approve of reject uploaded files.</h3>
+    {% endif %}
+    {% for doc in course.files.all %}
+        <div>
+            <h3>{{ doc.name }}</h3>
+            <a href="{{ doc.payload.url }}">Download</a>
+            <p>Uploaded By {{ doc.uploader }}</p>
+            {% if is_mod %}
+                <a href="{% url 'courses:remove' course_url=course.url doc_id=doc.id %}">REMOVE</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+    
+    {% if is_mod %}
+        {% for doc in course.unapproved_files.all %}
+            <div class='unapproved'>
+                <h3>UNAPPROVED</h3>
+                <h3>{{ doc.name }}</h3>
+                <a href="{{ doc.payload.url }}">Download</a>
+                <p>Uploaded By {{ doc.uploader }}</p>
+                <a href="{% url 'courses:approve' course_url=course.url doc_id=doc.id %}">APPROVE</a>
+                <a href="{% url 'courses:remove' course_url=course.url doc_id=doc.id %}">REMOVE</a>
+            </div>
+        {% endfor %}
+        {% for doc in course.rejected_files.all %}
+            <div class='removed'>
+                <h3>UNAPPROVED</h3>
+                <h3>{{ doc.name }}</h3>
+                <a href="{{ doc.payload.url }}">Download</a>
+                <p>Uploaded By {{ doc.uploader }}</p>
+                <a href="{% url 'courses:undelete' course_url=course.url doc_id=doc.id %}">UNDELETE</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

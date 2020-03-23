@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'server.apps.files',
+    'server.apps.mod',
+    'server.apps.content',
+    'server.apps.auth.apps.AuthConfig',
+    'server.apps.course',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +88,10 @@ DATABASES = {
     }
 }
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_URL = '/media/'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
