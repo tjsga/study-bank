@@ -3,8 +3,7 @@
     <h1 class="text-4xl font-bold">Study Bank</h1>
     <h3> Welcome, {{ user }}</h3>
     {% if is_mod %}
-        <a href='{% url 'mod:dash' %}'>Moderator Dashboard</a>
+        <p><a href='{% url 'mod:dash' %}'>Moderator Dashboard</a></p>
     {% endif %}
-    
-        <a href='{% url 'course:index' %}'>View Courses</a>
+        <p><a href='{% url 'course:index' %}'>View Courses</a></p>
 {% endblock %}

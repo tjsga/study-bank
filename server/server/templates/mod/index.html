@@ -1,4 +1,19 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
+    .unapproved {
+        border: 5px;
+        border-color: blue;
+        border-style: solid;
+    }
+    .removed {
+        border: 5px;
+        border-color: red;
+        border-style: solid;
+    }
+</style>
+
+{% endblock %}
 {% block body %}
 <div class="header">
     <h1>Classes Moderated by {{ user }}</h1>
@@ -9,6 +24,25 @@
         <div>
             <a href="{% url 'courses:show' class.url %}">{{class.name}}</a>
             <p>{{ class.files.all|length }} Document</p>
+            {% for doc in class.unapproved_files.all %}
+                <div class='unapproved'>
+                    <h3>UNAPPROVED</h3>
+                    <h3>{{ doc.name }}</h3>
+                    <a href="{{ doc.payload.url }}">Download</a>
+                    <p>Uploaded By {{ doc.uploader }}</p>
+                    <a href="{% url 'courses:approve' course_url=class.url doc_id=doc.id %}">APPROVE</a>
+                    <a href="{% url 'courses:remove' course_url=class.url doc_id=doc.id %}">REMOVE</a>
+                </div>
+            {% endfor %}
+            {% for doc in class.rejected_files.all %}
+                <div class='removed'>
+                    <h3>UNAPPROVED</h3>
+                    <h3>{{ doc.name }}</h3>
+                    <a href="{{ doc.payload.url }}">Download</a>
+                    <p>Uploaded By {{ doc.uploader }}</p>
+                    <a href="{% url 'courses:undelete' course_url=class.url doc_id=doc.id %}">UNDELETE</a>
+                </div>
+            {% endfor %}
         </div>
     {% endfor %}
 </div>
