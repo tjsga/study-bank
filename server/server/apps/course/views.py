@@ -27,6 +27,7 @@ def show(request, course_url):
         mod = Moderator.objects.get(username=request.session['user'])
     except Moderator.DoesNotExist:
         is_mod = False
+        return render(request, 'class/show.html', {'course': course, 'is_mod': is_mod})
         
     if mod.admin:
         is_mod = True

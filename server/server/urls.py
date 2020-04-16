@@ -27,5 +27,6 @@ urlpatterns = [
     path('logout/', auth_views.logout, name="logout"),
     path('courses/', include("server.apps.course.urls", namespace="courses")),
     path('mod/', include("server.apps.mod.urls", namespace="mod")),
+    path('file/', include("server.apps.files.urls", namespace="file")),
     path('', content_views.index, name="index"),
 ]

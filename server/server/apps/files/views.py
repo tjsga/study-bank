@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect
 
 from .forms import UploadFileForm
 from .models import File
+from ..decorators import login
 
 # Create your views here.
+@login
 def upload_file(request):
-    if 'type' in request.session and request.session['type'] in settings.ALLOWED_USERS:
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
